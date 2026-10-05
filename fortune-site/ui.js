@@ -59,6 +59,7 @@
     $('langs').innerHTML = CODES.map(l =>
       `<button type="button" data-l="${l}" aria-pressed="${l === lang}">${esc(d_label(l))}</button>`).join('');
     const dir = docDir();
+    document.querySelectorAll('a.doc-link').forEach(a => { a.href = dir + a.dataset.page; });
     $('t-links').innerHTML = [['guides', 'guides'], ['about', 'about'], ['privacy', 'privacy'], ['terms', 'terms'], ['contact', 'contact']]
       .map(([k, f]) => `<a href="${dir}${f}.html">${esc(t['nav' + k[0].toUpperCase() + k.slice(1)])}</a>`).join(' · ');
   }
