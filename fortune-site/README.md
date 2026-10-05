@@ -16,7 +16,7 @@
 
 ## 애드센스 준비 (build.js)
 1. `site.config.json`에 `siteUrl`(실제 도메인), `contactEmail`(실제 메일), 승인 후 `adsenseClient`(ca-pub-…)와 광고 단위 ID를 입력
-2. `node build.js` 실행 → `en/ ko/ th/ vi/ id/` 콘텐츠 페이지(가이드 3편, 소개, 개인정보처리방침, 이용약관, 문의), `sitemap.xml`, `robots.txt`, `ads.txt`, `config.js`, index.html의 메타/애드센스 코드를 생성
+2. `node build.js` 실행 → `en/ ko/ th/ vi/ id/` 콘텐츠 페이지(가이드 6편, 소개, 개인정보처리방침, 이용약관, 문의), `sitemap.xml`, `robots.txt`, `ads.txt`, `config.js`, index.html의 메타/애드센스 코드를 생성
 3. 도메인을 연결해 HTTPS로 배포한 뒤 AdSense에 사이트를 등록하고 `sitemap.xml`을 Search Console에 제출
 4. 유럽(프랑스어·스페인어 방문자 포함) 대응: AdSense의 "개인정보 보호 및 메시지"에서 EEA/영국 동의 메시지를 켜세요.
    (개인정보처리방침에 이미 해당 문구가 있으므로 실제 설정과 일치시켜야 합니다.)
@@ -26,7 +26,7 @@
 - `data.js`: 언어와 무관한 데이터(이름 목록, 한국 성, 별자리 날짜)
 - `lang/<code>.js`: 언어별 문구·띠·별자리·오행·한자 뜻·순우리말 뜻 (언어 하나 = 파일 하나)
 - `app.js`: 계산 로직 / `ui.js`: 화면·공유 링크 / `share.js`: 카드 이미지·공유 / `ads.js`: 광고 로더
-- `content/<lang>.js` (en·ko·th·vi·id) + `build.js`: 정적 콘텐츠 페이지 생성 (새 언어는 content 파일 추가 후 build.js의 언어 목록과 ui.js의 DOC_LANGS에 등록) / `og.png`: 링크 미리보기 이미지
+- `content/<lang>.js`·`content/x-<lang>.js`(추가 가이드)·`content/shared.js`(성씨/한자 표 데이터) (en·ko·th·vi·id) + `build.js`: 정적 콘텐츠 페이지 생성 (새 언어는 content 파일 추가 후 build.js의 언어 목록과 ui.js의 DOC_LANGS에 등록) / `og.png`: 링크 미리보기 이미지
 
 ## 새 언어 추가 (예: 말레이어 ms, 필리핀어 fil, 미얀마어 my, 크메르어 km)
 1. `lang/en.js`를 복사해 `lang/ms.js`로 만들고 값을 번역 (`registerLang('ms', {...})`, `htmlLang` 지정)

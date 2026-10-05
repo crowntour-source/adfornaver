@@ -14,8 +14,16 @@ const base = siteUrl || 'https://example.com';
 const email = cfg.contactEmail || 'contact@example.com';
 const today = new Date().toISOString().slice(0, 10);
 const LANGS = ['en', 'ko', 'th', 'vi', 'id'].map(c => require('./content/' + c + '.js'));
-const SLUGS = ['guides', 'guide-korean-names', 'guide-five-elements', 'guide-korean-zodiac', 'about', 'privacy', 'terms', 'contact'];
-const ADS_PAGES = new Set(['guide-korean-names', 'guide-five-elements', 'guide-korean-zodiac']);
+const SLUGS = ['guides', 'guide-korean-names', 'guide-five-elements', 'guide-korean-zodiac', 'guide-korean-surnames', 'guide-name-meanings', 'guide-zodiac-traits', 'about', 'privacy', 'terms', 'contact'];
+const ADS_PAGES = new Set(SLUGS.filter(s => s.startsWith('guide-')));
+
+// merge extra guide pages (content/x-<lang>.js) into each language
+const H = require('./content/shared.js');
+for (const L of LANGS) {
+  const x = require('./content/x-' + L.code + '.js')(H);
+  Object.assign(L.pages, x.pages);
+  L.pages.guides.html = L.pages.guides.html.replace('</ul>', x.items + '\n</ul>');
+}
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 
 const adsHead = cfg.adsenseClient
