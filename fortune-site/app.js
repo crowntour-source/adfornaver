@@ -78,42 +78,62 @@ function seededOrder(arr, seed) {
   return arr.map((x, i) => ({ x, k: strHash(seed + ':' + i) })).sort((a, b) => a.k - b.k).map(o => o.x);
 }
 
-function suggestNames(b, gender, surname, limit) {
-  const e = yearElement(b), sup = supportElement(e);
-  const pool = NAMES.filter(n => gender === 'u' || n.g === gender || n.g === 'u');
-  const rank = n => (n.el === sup ? 0 : n.el === e ? 1 : 2);
-  const shuffled = seededOrder(pool, `${b.y}${b.m}${b.d}${surname}${gender}`);
-  return shuffled.sort((a, c) => rank(a) - rank(c)).slice(0, limit || 6)
-    .map(n => ({ ...n, badge: n.el === sup ? 'badgeSupport' : n.el === e ? 'badgeSame' : 'badgeOther' }));
+function pickSurname(seed, choice) {
+  if (choice !== 'auto') { const f = SURNAMES.find(s => s.rom === choice); if (f) return f; }
+  return SURNAMES[strHash(seed + ':sn') % SURNAMES.length];
 }
 
-function meaningOf(hanja, langIdx) {
-  return [...hanja].map(c => `${c} ${GLOSS[c][langIdx]}`).join(' · ');
+// b may be null (birth date optional). vibe: 'any' or a vibe key.
+function suggestNames(b, gender, vibe, seed) {
+  const e = b ? yearElement(b) : null, sup = b ? supportElement(e) : null;
+  const pool = NAMES.filter(n => gender === 'u' || n.g === gender || n.g === 'u');
+  const rank = n => (vibe !== 'any' && n.v === vibe ? 0 : 4) + (e === null || n.el === null ? 2 : n.el === sup ? 0 : n.el === e ? 1 : 2);
+  return seededOrder(pool, seed).sort((x, y) => rank(x) - rank(y))
+    .map(n => ({ ...n, badge: n.hj === null ? 'native' : e === null ? null : n.el === sup ? 'badgeSupport' : n.el === e ? 'badgeSame' : 'badgeOther' }));
+}
+
+function meaningOf(n, g) {
+  return n.hj === null ? g.native[n.ko] : [...n.hj].map(c => `${c} ${g.gloss[c]}`).join(' · ');
 }
 
 /* ---------- UI ---------- */
+function langOrder() {
+  const pref = ['en', 'ko', 'th', 'vi', 'id', 'zh', 'fr', 'es'];
+  const codes = Object.keys(LANG_DATA);
+  return pref.filter(c => codes.includes(c)).concat(codes.filter(c => !pref.includes(c)));
+}
+
+// Resolve strings for a language, falling back to English per key
+function uiFor(code) {
+  const en = LANG_DATA[DEFAULT_LANG].ui, cur = LANG_DATA[code].ui;
+  return { ...en, ...cur, rel: { ...en.rel, ...cur.rel } };
+}
+
 if (typeof document !== 'undefined') {
   const $ = id => document.getElementById(id);
   const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
-  let lang = 'en';
+  const CODES = langOrder();
+  const PAGE = 6;
+  let lang = DEFAULT_LANG;
   const last = { match: null, name: null };
 
   function pickLang() {
     try {
       const q = new URLSearchParams(location.search).get('lang');
-      if (LANGS.includes(q)) return q;
+      if (CODES.includes(q)) return q;
       const st = localStorage.getItem('lang');
-      if (LANGS.includes(st)) return st;
+      if (CODES.includes(st)) return st;
     } catch (e) { /* storage unavailable */ }
     const nav = (navigator.language || 'en').slice(0, 2).toLowerCase();
-    return LANGS.includes(nav) ? nav : 'en';
+    const alias = { ms: 'id', tl: 'en', fil: 'en' }[nav] || nav;
+    return CODES.includes(alias) ? alias : 'en';
   }
 
   const fmt = (s, a, b) => s.replace('{a}', a).replace('{b}', b);
 
   function applyStatic() {
-    const t = I18N[lang];
-    document.documentElement.lang = HTML_LANG[lang];
+    const t = uiFor(lang);
+    document.documentElement.lang = LANG_DATA[lang].htmlLang;
     document.title = t.title;
     $('t-title').textContent = t.title;
     $('t-sub').textContent = t.subtitle;
@@ -126,16 +146,24 @@ if (typeof document !== 'undefined') {
     $('t-disc').textContent = t.disclaimer;
     $('t-foot').textContent = t.footer;
     document.querySelectorAll('[data-t]').forEach(el => { el.textContent = t[el.dataset.t]; });
-    $('langs').innerHTML = LANGS.map(l =>
-      `<button type="button" data-l="${l}" aria-pressed="${l === lang}">${LANG_LABEL[l]}</button>`).join('');
+    fillSurnames(t);
+    $('langs').innerHTML = CODES.map(l =>
+      `<button type="button" data-l="${l}" aria-pressed="${l === lang}">${esc(LANG_DATA[l].label)}</button>`).join('');
+  }
+
+  function fillSurnames(t) {
+    const sel = $('surname'), cur = sel.value || 'auto';
+    sel.innerHTML = `<option value="auto">${esc(t.sAuto)}</option>` +
+      SURNAMES.map(s => `<option value="${s.rom}">${s.ko} (${s.rom})</option>`).join('');
+    sel.value = cur;
   }
 
   function renderMatch() {
     const r = last.match, out = $('out-match');
     if (!r) { out.hidden = true; return; }
-    const t = I18N[lang];
-    const aCn = CN_ZODIAC[lang][cnAnimal(r.bA)], bCn = CN_ZODIAC[lang][cnAnimal(r.bB)];
-    const aW = SIGNS[lang][westernSign(r.bA)], bW = SIGNS[lang][westernSign(r.bB)];
+    const t = uiFor(lang), d = LANG_DATA[lang];
+    const aCn = d.cn[cnAnimal(r.bA)], bCn = d.cn[cnAnimal(r.bB)];
+    const aW = d.signs[westernSign(r.bA)], bW = d.signs[westernSign(r.bB)];
     const aL = lifePath(r.bA), bL = lifePath(r.bB);
     const vi = verdictIndex(r.res.score);
     out.innerHTML = `
@@ -153,26 +181,31 @@ if (typeof document !== 'undefined') {
   function renderNames() {
     const r = last.name, out = $('out-name');
     if (!r) { out.hidden = true; return; }
-    const t = I18N[lang], li = LANGS.indexOf(lang);
-    const e = yearElement(r.b), sup = supportElement(e);
-    const cjk = lang === 'ko' || lang === 'zh';
-    const cards = r.list.map(n => {
-      const given = cjk ? n.ko : n.rom;
-      const full = r.surname ? (cjk ? r.surname + given : r.surname + ' ' + given) : given;
+    const t = uiFor(lang), d = LANG_DATA[lang], en = LANG_DATA[DEFAULT_LANG];
+    const g = { gloss: { ...en.gloss, ...d.gloss }, native: { ...en.native, ...d.native } };
+    const shown = r.list.slice(0, PAGE * r.pages);
+    const cards = shown.map((n, i) => {
+      const hangul = r.sn.ko + n.ko, rom = `${r.sn.rom} ${n.rom}`;
+      const share = t.shareText.replace('{name}', `${hangul} (${rom})`);
       return `<div class="name">
-        <div class="big">${esc(full)}</div>
-        <div class="hj">${esc(n.ko)} · ${esc(n.hj)}</div>
-        <small>${esc(t.roman)}: ${esc(n.rom)}</small>
-        <small>${esc(t.pinyin)}: ${esc(n.py)}</small>
-        <small>${esc(t.meaning)}: ${esc(meaningOf(n.hj, li))}</small>
-        <small>${esc(FIVE[lang][n.el])}</small>
-        <span class="badge ${n.badge === 'badgeOther' ? 'o' : ''}">${esc(t[n.badge])}</span>
+        <div class="big">${esc(hangul)}</div>
+        <div class="rom">${esc(rom)}</div>
+        ${n.hj ? `<div class="hj">${esc(n.hj)} · ${esc(n.py)}</div>` : ''}
+        <small>${esc(t.meaning)}: ${esc(meaningOf(n, g))}</small>
+        ${n.el !== null && r.b ? `<small>${esc(d.five[n.el])}</small>` : ''}
+        ${n.badge ? `<span class="badge ${n.badge === 'badgeOther' ? 'o' : ''}">${esc(t[n.badge])}</span>` : ''}
+        <button type="button" class="copy" data-share="${esc(share)}">${esc(t.copy)}</button>
       </div>`;
     }).join('');
+    let head = '';
+    if (r.b) {
+      const e = yearElement(r.b);
+      head = `<p class="note">${esc(t.yearElem)}: <b>${esc(d.five[e])}</b> · ${esc(t.helpElem)}: <b>${esc(d.five[supportElement(e)])}</b></p>`;
+    }
     out.innerHTML = `
-      <h2>${esc(t.nameResult)}</h2>
-      <p class="note">${esc(t.yearElem)}: <b>${esc(FIVE[lang][e])}</b> · ${esc(t.helpElem)}: <b>${esc(FIVE[lang][sup])}</b></p>
+      <h2>${esc(t.nameResult)}</h2>${head}
       <div class="names">${cards}</div>
+      ${shown.length < r.list.length ? `<button type="button" class="go more" id="more">${esc(t.more)}</button>` : ''}
       <p class="note">${esc(t.nameNote)}</p>`;
     out.hidden = false;
   }
@@ -195,10 +228,18 @@ if (typeof document !== 'undefined') {
   $('tab-match').addEventListener('click', () => showTab('match'));
   $('tab-name').addEventListener('click', () => showTab('name'));
 
+  $('out-name').addEventListener('click', e => {
+    if (e.target.id === 'more') { last.name.pages++; renderNames(); return; }
+    const b = e.target.closest('button[data-share]');
+    if (!b) return;
+    const done = () => { b.textContent = uiFor(lang).copied; };
+    if (navigator.clipboard) navigator.clipboard.writeText(b.dataset.share).then(done, done); else done();
+  });
+
   $('form-match').addEventListener('submit', e => {
     e.preventDefault();
     const bA = parseDate($('birthA').value), bB = parseDate($('birthB').value);
-    if (!bA || !bB) { $('err-match').textContent = I18N[lang].required; last.match = null; renderMatch(); return; }
+    if (!bA || !bB) { $('err-match').textContent = uiFor(lang).required; last.match = null; renderMatch(); return; }
     $('err-match').textContent = '';
     last.match = { bA, bB, res: compatibility(bA, bB, $('nameA').value, $('nameB').value) };
     renderMatch();
@@ -206,19 +247,22 @@ if (typeof document !== 'undefined') {
 
   $('form-name').addEventListener('submit', e => {
     e.preventDefault();
-    const b = parseDate($('bdate').value);
-    if (!b) { $('err-name').textContent = I18N[lang].required; last.name = null; renderNames(); return; }
-    $('err-name').textContent = '';
-    const surname = $('surname').value.trim();
-    last.name = { b, surname, list: suggestNames(b, $('gender').value, surname, 6) };
+    const b = parseDate($('bdate').value); // optional
+    const gender = $('gender').value, vibe = $('vibe').value;
+    const seed = [$('yourName').value.trim().toLowerCase(), $('bdate').value, gender, vibe].join('|');
+    last.name = {
+      b, pages: 1,
+      sn: pickSurname(seed, $('surname').value),
+      list: suggestNames(b, gender, vibe, seed)
+    };
     renderNames();
   });
 
   const todayStr = new Date().toISOString().slice(0, 10);
-  ['birthA', 'birthB'].forEach(id => { $(id).max = todayStr; });
+  ['birthA', 'birthB', 'bdate'].forEach(id => { $(id).max = todayStr; });
   setLang(pickLang());
 }
 
 if (typeof module !== 'undefined') {
-  module.exports = { parseDate, cnAnimal, yearElement, westernSign, lifePath, compatibility, suggestNames, meaningOf };
+  module.exports = { parseDate, cnAnimal, yearElement, westernSign, lifePath, compatibility, suggestNames, meaningOf, pickSurname };
 }

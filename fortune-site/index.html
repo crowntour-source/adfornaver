@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>궁합 · 작명 / Compatibility & Name Finder</title>
-<meta name="description" content="Zodiac compatibility and Korean baby-name finder in English, 한국어, 中文, Français, Español.">
+<title>K-Name & K-Match</title>
+<meta name="description" content="Get a fun Korean name and K-match compatibility. English, 한국어, ไทย, Tiếng Việt, Bahasa Indonesia, 中文, Français, Español.">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -46,16 +46,22 @@
     <form id="form-name" novalidate>
       <div class="grid">
         <div>
-          <label for="surname" data-t="surname"></label><input id="surname" maxlength="20" autocomplete="off">
+          <label for="yourName" data-t="yourName"></label><input id="yourName" maxlength="40" autocomplete="off">
+          <label for="surname" data-t="surname"></label><select id="surname"></select>
           <label for="gender" data-t="gender"></label>
           <select id="gender"><option value="u" data-t="gU"></option><option value="m" data-t="gM"></option><option value="f" data-t="gF"></option></select>
         </div>
         <div>
-          <label for="bdate" data-t="bdate"></label><input id="bdate" type="date" min="1900-01-01" required>
+          <label for="vibe" data-t="vibe"></label>
+          <select id="vibe">
+            <option value="any" data-t="vAny"></option><option value="cute" data-t="vCute"></option>
+            <option value="cool" data-t="vCool"></option><option value="elegant" data-t="vElegant"></option>
+            <option value="bright" data-t="vBright"></option><option value="strong" data-t="vStrong"></option>
+          </select>
+          <label for="bdate" data-t="bdate"></label><input id="bdate" type="date" min="1900-01-01">
         </div>
       </div>
       <button class="go" type="submit" id="t-find"></button>
-      <p class="err" id="err-name" role="alert"></p>
     </form>
     <div id="out-name" hidden></div>
   </section>
@@ -64,7 +70,14 @@
   <footer id="t-foot"></footer>
 </div>
 <script src="data.js"></script>
-<script src="i18n.js"></script>
+<script src="lang/en.js"></script>
+<script src="lang/ko.js"></script>
+<script src="lang/th.js"></script>
+<script src="lang/vi.js"></script>
+<script src="lang/id.js"></script>
+<script src="lang/zh.js"></script>
+<script src="lang/fr.js"></script>
+<script src="lang/es.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

@@ -1,7 +1,7 @@
 :root{--bg:#faf7f2;--card:#fff;--ink:#2b2433;--muted:#6f6679;--accent:#b4375a;--accent2:#3b5b8c;--line:#e8e1d8;--ok:#2e7d5b}
 @media (prefers-color-scheme:dark){:root{--bg:#17141c;--card:#221e2a;--ink:#f1ecf5;--muted:#a79db3;--accent:#e0678a;--accent2:#7fa3d9;--line:#38323f;--ok:#58c49a}}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI","Noto Sans KR","Noto Sans SC","PingFang SC","Malgun Gothic",sans-serif}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI","Noto Sans KR","Noto Sans SC","Noto Sans Thai","Leelawadee UI","PingFang SC","Malgun Gothic",sans-serif}
 .wrap{max-width:760px;margin:0 auto;padding:0 16px 48px}
 header{padding:20px 0 8px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center}
 h1{font-size:1.5rem;margin:0}
@@ -37,3 +37,7 @@ input,select{width:100%;padding:10px 12px;border:1px solid var(--line);border-ra
 .note{color:var(--muted);font-size:.85rem}
 footer{color:var(--muted);font-size:.8rem;text-align:center;margin-top:24px}
 [hidden]{display:none!important}
+.name .big{font-size:1.6rem}
+.name .rom{font-weight:600}
+.copy{margin-top:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:4px 10px;font:inherit;font-size:.8rem;cursor:pointer}
+.more{background:var(--accent2);margin:16px 0}
