@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://example.com/</loc><lastmod>2026-10-05</lastmod></url>
+  <url><loc>https://example.com/en/guides.html</loc><lastmod>2026-10-05</lastmod></url>
+  <url><loc>https://example.com/en/guide-korean-names.html</loc><lastmod>2026-10-05</lastmod></url>
+  <url><loc>https://example.com/en/guide-five-elements.html</loc><lastmod>2026-10-05</lastmod></url>
+  <url><loc>https://example.com/en/guide-korean-zodiac.html</loc><lastmod>2026-10-05</lastmod></url>
+  <url><loc>https://example.com/en/about.html</loc><lastmod>2026-10-05</lastmod></url>
+  <url><loc>https://example.com/en/privacy.html</loc><lastmod>2026-10-05</lastmod></url>
+  <url><loc>https://example.com/en/terms.html</loc><lastmod>2026-10-05</lastmod></url>
+  <url><loc>https://example.com/en/contact.html</loc><lastmod>2026-10-05</lastmod></url>
+  <url><loc>https://example.com/ko/guides.html</loc><lastmod>2026-10-05</lastmod></url>
+  <url><loc>https://example.com/ko/guide-korean-names.html</loc><lastmod>2026-10-05</lastmod></url>
+  <url><loc>https://example.com/ko/guide-five-elements.html</loc><lastmod>2026-10-05</lastmod></url>
+  <url><loc>https://example.com/ko/guide-korean-zodiac.html</loc><lastmod>2026-10-05</lastmod></url>
+  <url><loc>https://example.com/ko/about.html</loc><lastmod>2026-10-05</lastmod></url>
+  <url><loc>https://example.com/ko/privacy.html</loc><lastmod>2026-10-05</lastmod></url>
+  <url><loc>https://example.com/ko/terms.html</loc><lastmod>2026-10-05</lastmod></url>
+  <url><loc>https://example.com/ko/contact.html</loc><lastmod>2026-10-05</lastmod></url>
+</urlset>

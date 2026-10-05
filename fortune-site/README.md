@@ -8,10 +8,25 @@
 - 지원 언어: EN · 한국어 · ไทย · Tiếng Việt · Bahasa Indonesia · 中文 · FR · ES
   (`?lang=th` 쿼리 → 저장된 선택 → 브라우저 언어 순으로 적용, 말레이어 브라우저는 인도네시아어로 연결)
 
+## 확산 기능 (공유)
+- 결과 카드 이미지(인스타 피드 4:5 / 스토리 9:16)를 브라우저에서 생성·저장 (서버 업로드 없음)
+- 모바일: 기본 공유창(이미지 포함) → 인스타·페북 앱 선택 / PC: 이미지 저장 + Facebook·WhatsApp·LINE·Telegram·X 링크 + 링크·문구 복사
+- 공유 링크로 들어온 친구는 같은 카드와 "나도 해보기" 버튼을 봄 (링크에 생년월일은 포함되지 않음)
+- 재미 요소: 아이돌 프로필(포지션·행운의 숫자·팬 컬러), 커플 이름 조합, 드라마 제목, 케미 스탯 4종
+
+## 애드센스 준비 (build.js)
+1. `site.config.json`에 `siteUrl`(실제 도메인), `contactEmail`(실제 메일), 승인 후 `adsenseClient`(ca-pub-…)와 광고 단위 ID를 입력
+2. `node build.js` 실행 → `en/`·`ko/` 콘텐츠 페이지(가이드 3편, 소개, 개인정보처리방침, 이용약관, 문의), `sitemap.xml`, `robots.txt`, `ads.txt`, `config.js`, index.html의 메타/애드센스 코드를 생성
+3. 도메인을 연결해 HTTPS로 배포한 뒤 AdSense에 사이트를 등록하고 `sitemap.xml`을 Search Console에 제출
+4. 유럽(프랑스어·스페인어 방문자 포함) 대응: AdSense의 "개인정보 보호 및 메시지"에서 EEA/영국 동의 메시지를 켜세요.
+   (개인정보처리방침에 이미 해당 문구가 있으므로 실제 설정과 일치시켜야 합니다.)
+`siteUrl`/`contactEmail`이 비어 있으면 build.js가 경고합니다. 예시 도메인·이메일이 남은 채 배포하지 마세요.
+
 ## 파일 구조
 - `data.js`: 언어와 무관한 데이터(이름 목록, 한국 성, 별자리 날짜)
 - `lang/<code>.js`: 언어별 문구·띠·별자리·오행·한자 뜻·순우리말 뜻 (언어 하나 = 파일 하나)
-- `app.js`: 계산·화면 / `style.css` / `index.html`
+- `app.js`: 계산 로직 / `ui.js`: 화면·공유 링크 / `share.js`: 카드 이미지·공유 / `ads.js`: 광고 로더
+- `content/<lang>.js` + `build.js`: 정적 콘텐츠 페이지 생성 / `og.png`: 링크 미리보기 이미지
 
 ## 새 언어 추가 (예: 말레이어 ms, 필리핀어 fil, 미얀마어 my, 크메르어 km)
 1. `lang/en.js`를 복사해 `lang/ms.js`로 만들고 값을 번역 (`registerLang('ms', {...})`, `htmlLang` 지정)

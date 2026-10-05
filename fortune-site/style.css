@@ -38,6 +38,28 @@ input,select{width:100%;padding:10px 12px;border:1px solid var(--line);border-ra
 footer{color:var(--muted);font-size:.8rem;text-align:center;margin-top:24px}
 [hidden]{display:none!important}
 .name .big{font-size:1.6rem}
+.name.picked{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent) inset}
 .name .rom{font-weight:600}
 .copy{margin-top:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:4px 10px;font:inherit;font-size:.8rem;cursor:pointer}
 .more{background:var(--accent2);margin:16px 0}
+.share{margin-top:20px;padding-top:16px;border-top:1px solid var(--line);text-align:center}
+.share h3{margin:0 0 12px}
+.preview{width:100%;max-width:360px;height:auto;border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,.18)}
+.sbtns{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:12px 0}
+.sbtns button,.sbtns a{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:8px 14px;font:inherit;font-size:.9rem;cursor:pointer;text-decoration:none}
+.sbtns button.pri{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:700}
+.banner{background:var(--accent);color:#fff;border-radius:12px;padding:10px 14px;margin-bottom:14px;font-weight:600}
+.ship,.drama{margin:6px 0}.drama small{color:var(--muted)}
+.stat{display:grid;grid-template-columns:110px 1fr 36px;gap:8px;align-items:center;font-size:.9rem}
+.stat .bar{margin:0}.stat b{text-align:right}
+.ad-slot{margin:16px 0;min-height:0;text-align:center}.ad-slot:empty{display:none}
+.links{text-align:center;font-size:.85rem;margin-top:16px}.links a{color:var(--accent2)}
+.page .brand{font-size:1.5rem;font-weight:800;color:var(--ink);text-decoration:none}
+.pill{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:6px 12px;border-radius:999px;text-decoration:none;font-size:.9rem}
+.topnav{margin:8px 0 16px}
+.prose h1{font-size:1.6rem;margin-top:0}.prose h2{font-size:1.2rem;margin-top:1.6em;color:var(--accent2)}
+.prose a{color:var(--accent2)}
+.prose table{border-collapse:collapse;width:100%;margin:12px 0}.prose th,.prose td{border:1px solid var(--line);padding:6px 10px;text-align:left}
+.guide-list li{margin-bottom:14px}
+.cta{display:flex;flex-wrap:wrap;gap:10px}.cta .go{display:inline-block;width:auto;padding:12px 18px;text-decoration:none;color:#fff;margin-top:8px}.cta .go.alt{background:var(--accent2)}
+:lang(ko){word-break:keep-all}

@@ -5,6 +5,15 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>K-Name & K-Match</title>
 <meta name="description" content="Get a fun Korean name and K-match compatibility. English, 한국어, ไทย, Tiếng Việt, Bahasa Indonesia, 中文, Français, Español.">
+<!--BUILD:HEAD-->
+<link rel="canonical" href="https://example.com/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="K-Name &amp; K-Match: Fun Korean names and K-style compatibility for fans of Korea">
+<meta property="og:description" content="Get a fun Korean name with its meaning and check your K-Match. Share the card on Instagram and Facebook.">
+<meta property="og:url" content="https://example.com/">
+<meta property="og:image" content="https://example.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<!--BUILD:END-->
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -40,6 +49,7 @@
       <p class="err" id="err-match" role="alert"></p>
     </form>
     <div id="out-match" hidden></div>
+    <div id="share-match" class="share" hidden></div>
   </section>
 
   <section id="panel-name" class="card" role="tabpanel" hidden>
@@ -64,9 +74,13 @@
       <button class="go" type="submit" id="t-find"></button>
     </form>
     <div id="out-name" hidden></div>
+    <div id="share-name" class="share" hidden></div>
   </section>
 
+  <div class="ad-slot" data-slot="result"></div>
+
   <p class="note" id="t-disc"></p>
+  <nav class="links" id="t-links" aria-label="Site"></nav>
   <footer id="t-foot"></footer>
 </div>
 <script src="data.js"></script>
@@ -78,6 +92,10 @@
 <script src="lang/zh.js"></script>
 <script src="lang/fr.js"></script>
 <script src="lang/es.js"></script>
+<script src="config.js"></script>
 <script src="app.js"></script>
+<script src="share.js"></script>
+<script src="ui.js"></script>
+<script src="ads.js" defer></script>
 </body>
 </html>
