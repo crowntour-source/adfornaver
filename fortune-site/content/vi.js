@@ -100,6 +100,8 @@ module.exports = {
 <p>Khách truy cập tại Khu vực Kinh tế Châu Âu, Vương quốc Anh và Thụy Sĩ sẽ được yêu cầu đồng ý qua thông báo được Google chứng nhận trước khi dùng quảng cáo cá nhân hóa hoặc cookie không thiết yếu.</p>
 <h2>Chia sẻ mạng xã hội</h2>
 <p>Các nút chia sẻ là liên kết thông thường đến Facebook, WhatsApp, LINE, Telegram và X. Chúng tôi không tải mã mạng xã hội trên trang. Khi bạn nhấp nút, bạn rời trang của chúng tôi và chính sách của dịch vụ đó được áp dụng. Instagram không có liên kết chia sẻ trên web nên chúng tôi cung cấp ảnh để bạn tự lưu và đăng.</p>
+<h2>Tính năng giọng nói</h2>
+<p>Nút Nghe dùng tính năng đọc văn bản (TTS) có sẵn trên thiết bị của bạn và không có gì được gửi cho chúng tôi. Nút micro là tùy chọn và chỉ bật khi bạn nhấn. Nút này dùng dịch vụ nhận dạng giọng nói của trình duyệt, có thể gửi âm thanh đến nhà cung cấp trình duyệt (ví dụ Google trong Chrome) để chuyển thành văn bản. Chúng tôi không nhận hay lưu âm thanh. Chỉ văn bản kết quả hiện trong ô trên màn hình của bạn.</p>
 <h2>Nhật ký máy chủ</h2>
 <p>Nhà cung cấp lưu trữ có thể giữ nhật ký kỹ thuật tiêu chuẩn như địa chỉ IP, loại trình duyệt và thời gian yêu cầu để bảo mật và vận hành.</p>
 <h2>Trẻ em</h2>

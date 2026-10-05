@@ -147,6 +147,7 @@
       <div class="row"><b>${esc(t.western)}: ${esc(aW)} × ${esc(bW)}</b>${esc(fmt(t.rel[r.res.wr.key], aW, bW))}</div>
       <div class="row"><b>${esc(t.lifePath)}: ${r.pA.lp} × ${r.pB.lp}</b>${esc(fmt(t.rel[r.res.lp.key], r.pA.lp, r.pB.lp))}</div>
       <div class="row"><b>${esc(t.tipsTitle)}</b>${esc(t.tips[vi])}</div>
+      <button type="button" class="copy" id="say-match">🔊 ${esc(t.readResult)}</button>
       ${r.shared ? `<button type="button" class="go" id="try-match">${esc(t.tryMatch)}</button>` : ''}`;
     out.hidden = false;
     const card = matchCard(r, t, d);
@@ -188,6 +189,8 @@
         <small>${esc(t.lblPosition)}: ${esc(t.positions[prof.pos])} · ${esc(t.lblLucky)}: ${prof.lucky}</small>
         ${n.el !== null && r.b ? `<small>${esc(d.five[n.el])}</small>` : ''}
         ${n.badge ? `<span class="badge ${n.badge === 'badgeOther' ? 'o' : ''}">${esc(t[n.badge])}</span>` : ''}
+        <button type="button" class="copy" data-say="${i}">🔊 ${esc(t.listen)}</button>
+        <button type="button" class="copy" data-say="${i}" data-slow="1">🐢 ${esc(t.slow)}</button>
         <button type="button" class="copy" data-pick="${i}">${esc(t.share)}</button>
       </div>`;
     }).join('');
@@ -200,6 +203,7 @@
       ${r.shared ? `<div class="banner">${esc(t.sharedName)}</div>` : ''}
       <h2>${esc(t.nameResult)}</h2>${head}
       <div class="names">${cards}</div>
+      <p class="note" id="voice-msg" role="status"></p>
       ${!r.shared && shown.length < r.list.length ? `<button type="button" class="go more" id="more">${esc(t.more)}</button>` : ''}
       ${r.shared ? `<button type="button" class="go" id="try-name">${esc(t.tryName)}</button>` : ''}
       <p class="note">${esc(t.nameNote)}</p>`;
@@ -238,10 +242,37 @@
   $('out-name').addEventListener('click', e => {
     if (e.target.id === 'more') { last.name.pages++; renderNames(); return; }
     if (e.target.id === 'try-name') { resetShared(); return; }
+    const say = e.target.closest('button[data-say]');
+    if (say) {
+      const n = last.name.list[+say.dataset.say];
+      const ok = Voice.speak(last.name.sn.ko + n.ko, 'ko', say.dataset.slow ? 0.55 : 0.9);
+      $('voice-msg').textContent = ok ? '' : uiFor(lang).voiceNone;
+      return;
+    }
     const b = e.target.closest('button[data-pick]');
     if (b) { sel.name = +b.dataset.pick; renderNames(); $('share-name').scrollIntoView({ behavior: 'smooth', block: 'center' }); }
   });
-  $('out-match').addEventListener('click', e => { if (e.target.id === 'try-match') resetShared(); });
+  $('out-match').addEventListener('click', e => {
+    if (e.target.id === 'try-match') resetShared();
+    if (e.target.id === 'say-match' && last.match) {
+      const t = uiFor(lang), vi = verdictIndex(last.match.res.score);
+      Voice.speak(`${last.match.res.score}%. ${t.verdict[vi]}. ${t.dramaTitles[vi]}`, lang, 0.95);
+    }
+  });
+
+  /* ---------- voice input (optional, starts only on click) ---------- */
+  document.querySelectorAll('button[data-mic]').forEach(b => {
+    if (!Voice.canListen()) return;
+    b.hidden = false;
+    b.addEventListener('click', () => {
+      const t = uiFor(lang), input = $(b.dataset.mic), label = b.querySelector('span');
+      label.textContent = t.micOn; b.disabled = true;
+      Voice.listen(lang, res => {
+        if (res.text) input.value = clean(res.text.replace(/[.!?。]+$/, ''));
+        else if (res.error !== 'aborted') input.placeholder = t.micErr;
+      }, () => { b.disabled = false; label.textContent = t.mic; });
+    });
+  });
 
   $('form-match').addEventListener('submit', e => {
     e.preventDefault();

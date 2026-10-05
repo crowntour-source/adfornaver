@@ -119,7 +119,15 @@ registerLang("zh", {
   "navPrivacy": "隐私政策",
   "navTerms": "服务条款",
   "navContact": "联系我们",
-  "cardFooter": "获取你的韩文名"
+  "cardFooter": "获取你的韩文名",
+  "listen": "收听",
+  "slow": "慢速",
+  "readResult": "朗读",
+  "voiceNone": "此设备没有韩语语音。请在设备设置中安装韩语语音（TTS）。",
+  "mic": "语音输入",
+  "micOn": "聆听中…",
+  "micNone": "此浏览器不支持语音输入。",
+  "micErr": "没有听清，请再试一次。"
  },
  "cn": [
   "鼠",

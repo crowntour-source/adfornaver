@@ -119,7 +119,15 @@ registerLang("vi", {
   "navPrivacy": "Chính sách bảo mật",
   "navTerms": "Điều khoản",
   "navContact": "Liên hệ",
-  "cardFooter": "Nhận tên Hàn của bạn"
+  "cardFooter": "Nhận tên Hàn của bạn",
+  "listen": "Nghe",
+  "slow": "Chậm",
+  "readResult": "Đọc to",
+  "voiceNone": "Thiết bị này chưa có giọng đọc tiếng Hàn. Hãy cài giọng đọc tiếng Hàn (TTS) trong phần cài đặt.",
+  "mic": "Nói",
+  "micOn": "Đang nghe…",
+  "micNone": "Trình duyệt này không hỗ trợ nhập bằng giọng nói.",
+  "micErr": "Không nghe rõ. Vui lòng thử lại."
  },
  "cn": [
   "Chuột",

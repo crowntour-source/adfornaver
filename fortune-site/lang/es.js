@@ -119,7 +119,15 @@ registerLang("es", {
   "navPrivacy": "Privacidad",
   "navTerms": "Términos",
   "navContact": "Contacto",
-  "cardFooter": "Obtén tu nombre coreano"
+  "cardFooter": "Obtén tu nombre coreano",
+  "listen": "Escuchar",
+  "slow": "Lento",
+  "readResult": "Leer en voz alta",
+  "voiceNone": "No hay voz coreana en este dispositivo. Instala una voz coreana (síntesis de voz) en los ajustes.",
+  "mic": "Hablar",
+  "micOn": "Escuchando…",
+  "micNone": "Este navegador no admite la entrada de voz.",
+  "micErr": "No te oí bien. Inténtalo de nuevo."
  },
  "cn": [
   "Rata",

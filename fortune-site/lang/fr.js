@@ -119,7 +119,15 @@ registerLang("fr", {
   "navPrivacy": "Confidentialité",
   "navTerms": "Conditions",
   "navContact": "Contact",
-  "cardFooter": "Obtenez votre nom coréen"
+  "cardFooter": "Obtenez votre nom coréen",
+  "listen": "Écouter",
+  "slow": "Lent",
+  "readResult": "Lire à voix haute",
+  "voiceNone": "Aucune voix coréenne sur cet appareil. Installez une voix coréenne (synthèse vocale) dans les réglages.",
+  "mic": "Parler",
+  "micOn": "Écoute…",
+  "micNone": "La saisie vocale n'est pas prise en charge par ce navigateur.",
+  "micErr": "Je n'ai pas bien entendu. Réessayez."
  },
  "cn": [
   "Rat",

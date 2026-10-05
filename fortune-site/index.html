@@ -36,12 +36,12 @@
       <div class="grid">
         <fieldset>
           <legend id="t-pa"></legend>
-          <label for="nameA" data-t="name"></label><input id="nameA" maxlength="40" autocomplete="off">
+          <label for="nameA" data-t="name"></label><input id="nameA" maxlength="40" autocomplete="off"><button type="button" class="mic" data-mic="nameA" hidden>🎤 <span data-t="mic"></span></button>
           <label for="birthA" data-t="birth"></label><input id="birthA" type="date" min="1900-01-01" required>
         </fieldset>
         <fieldset>
           <legend id="t-pb"></legend>
-          <label for="nameB" data-t="name"></label><input id="nameB" maxlength="40" autocomplete="off">
+          <label for="nameB" data-t="name"></label><input id="nameB" maxlength="40" autocomplete="off"><button type="button" class="mic" data-mic="nameB" hidden>🎤 <span data-t="mic"></span></button>
           <label for="birthB" data-t="birth"></label><input id="birthB" type="date" min="1900-01-01" required>
         </fieldset>
       </div>
@@ -56,7 +56,7 @@
     <form id="form-name" novalidate>
       <div class="grid">
         <div>
-          <label for="yourName" data-t="yourName"></label><input id="yourName" maxlength="40" autocomplete="off">
+          <label for="yourName" data-t="yourName"></label><input id="yourName" maxlength="40" autocomplete="off"><button type="button" class="mic" data-mic="yourName" hidden>🎤 <span data-t="mic"></span></button>
           <label for="surname" data-t="surname"></label><select id="surname"></select>
           <label for="gender" data-t="gender"></label>
           <select id="gender"><option value="u" data-t="gU"></option><option value="m" data-t="gM"></option><option value="f" data-t="gF"></option></select>
@@ -95,6 +95,7 @@
 <script src="config.js"></script>
 <script src="app.js"></script>
 <script src="share.js"></script>
+<script src="voice.js"></script>
 <script src="ui.js"></script>
 <script src="ads.js" defer></script>
 </body>

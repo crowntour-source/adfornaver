@@ -119,7 +119,15 @@ registerLang("en", {
   "navPrivacy": "Privacy Policy",
   "navTerms": "Terms",
   "navContact": "Contact",
-  "cardFooter": "Get your Korean name"
+  "cardFooter": "Get your Korean name",
+  "listen": "Listen",
+  "slow": "Slow",
+  "readResult": "Read aloud",
+  "voiceNone": "No Korean voice found on this device. Install a Korean text-to-speech voice in your device settings.",
+  "mic": "Speak",
+  "micOn": "Listening…",
+  "micNone": "Voice input is not supported in this browser.",
+  "micErr": "Could not hear you. Please try again."
  },
  "cn": [
   "Rat",

@@ -120,6 +120,8 @@ module.exports = {
 <p>Visitors in the European Economic Area, the United Kingdom and Switzerland are asked for consent through a Google-certified consent message before personalized ads or non-essential cookies are used.</p>
 <h2>Social sharing</h2>
 <p>Share buttons are plain links to Facebook, WhatsApp, LINE, Telegram and X. We load no social media scripts on our pages. When you click a button, you leave our site and that service's own privacy policy applies. Instagram has no web share link, so we offer an image you can save and post yourself.</p>
+<h2>Voice features</h2>
+<p>The Listen button uses your device's built-in text-to-speech to read text aloud, and nothing is sent to us. The microphone button is optional and starts only when you press it. It uses your browser's speech recognition service, which may send the audio to the browser's provider (for example Google in Chrome) to turn it into text. We never receive or store the audio. Only the resulting text appears in the field on your screen.</p>
 <h2>Server logs</h2>
 <p>Our hosting provider may keep standard technical logs, such as IP address, browser type and request time, for security and operation.</p>
 <h2>Children</h2>

@@ -119,7 +119,15 @@ registerLang("ko", {
   "navPrivacy": "개인정보처리방침",
   "navTerms": "이용약관",
   "navContact": "문의",
-  "cardFooter": "내 한국 이름 받기"
+  "cardFooter": "내 한국 이름 받기",
+  "listen": "듣기",
+  "slow": "천천히",
+  "readResult": "읽어주기",
+  "voiceNone": "이 기기에 한국어 음성이 없습니다. 기기 설정에서 한국어 음성(TTS)을 설치해 주세요.",
+  "mic": "말하기",
+  "micOn": "듣는 중…",
+  "micNone": "이 브라우저는 음성 입력을 지원하지 않습니다.",
+  "micErr": "잘 들리지 않았어요. 다시 시도해 주세요."
  },
  "cn": [
   "쥐",

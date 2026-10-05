@@ -65,3 +65,5 @@ footer{color:var(--muted);font-size:.8rem;text-align:center;margin-top:24px}
 :lang(ko){word-break:keep-all}
 .pill[aria-current=page]{background:var(--accent);border-color:var(--accent);color:#fff}
 .prose table{display:block;overflow-x:auto}
+.mic{margin-top:6px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:4px 12px;font:inherit;font-size:.85rem;cursor:pointer}.mic:disabled{opacity:.6}
+#say-match{margin:8px 0}

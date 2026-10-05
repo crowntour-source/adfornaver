@@ -119,7 +119,15 @@ registerLang("id", {
   "navPrivacy": "Kebijakan Privasi",
   "navTerms": "Ketentuan",
   "navContact": "Kontak",
-  "cardFooter": "Dapatkan nama Koreamu"
+  "cardFooter": "Dapatkan nama Koreamu",
+  "listen": "Dengar",
+  "slow": "Pelan",
+  "readResult": "Bacakan",
+  "voiceNone": "Perangkat ini tidak punya suara bahasa Korea. Pasang suara Korea (TTS) di pengaturan.",
+  "mic": "Bicara",
+  "micOn": "Mendengarkan…",
+  "micNone": "Browser ini tidak mendukung input suara.",
+  "micErr": "Tidak terdengar jelas. Coba lagi."
  },
  "cn": [
   "Tikus",
