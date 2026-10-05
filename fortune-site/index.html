@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>궁합 · 작명 / Compatibility & Name Finder</title>
+<meta name="description" content="Zodiac compatibility and Korean baby-name finder in English, 한국어, 中文, Français, Español.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1 id="t-title"></h1>
+      <p class="sub" id="t-sub"></p>
+    </div>
+    <nav class="langs" id="langs" aria-label="Language"></nav>
+  </header>
+
+  <div class="tabs" role="tablist">
+    <button role="tab" id="tab-match" aria-selected="true" aria-controls="panel-match"></button>
+    <button role="tab" id="tab-name" aria-selected="false" aria-controls="panel-name"></button>
+  </div>
+
+  <section id="panel-match" class="card" role="tabpanel">
+    <form id="form-match" novalidate>
+      <div class="grid">
+        <fieldset>
+          <legend id="t-pa"></legend>
+          <label for="nameA" data-t="name"></label><input id="nameA" maxlength="40" autocomplete="off">
+          <label for="birthA" data-t="birth"></label><input id="birthA" type="date" min="1900-01-01" required>
+        </fieldset>
+        <fieldset>
+          <legend id="t-pb"></legend>
+          <label for="nameB" data-t="name"></label><input id="nameB" maxlength="40" autocomplete="off">
+          <label for="birthB" data-t="birth"></label><input id="birthB" type="date" min="1900-01-01" required>
+        </fieldset>
+      </div>
+      <button class="go" type="submit" id="t-calc"></button>
+      <p class="err" id="err-match" role="alert"></p>
+    </form>
+    <div id="out-match" hidden></div>
+  </section>
+
+  <section id="panel-name" class="card" role="tabpanel" hidden>
+    <form id="form-name" novalidate>
+      <div class="grid">
+        <div>
+          <label for="surname" data-t="surname"></label><input id="surname" maxlength="20" autocomplete="off">
+          <label for="gender" data-t="gender"></label>
+          <select id="gender"><option value="u" data-t="gU"></option><option value="m" data-t="gM"></option><option value="f" data-t="gF"></option></select>
+        </div>
+        <div>
+          <label for="bdate" data-t="bdate"></label><input id="bdate" type="date" min="1900-01-01" required>
+        </div>
+      </div>
+      <button class="go" type="submit" id="t-find"></button>
+      <p class="err" id="err-name" role="alert"></p>
+    </form>
+    <div id="out-name" hidden></div>
+  </section>
+
+  <p class="note" id="t-disc"></p>
+  <footer id="t-foot"></footer>
+</div>
+<script src="data.js"></script>
+<script src="i18n.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
