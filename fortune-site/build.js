@@ -13,7 +13,7 @@ if (cfg.adsenseClient && !/^ca-pub-\d{10,}$/.test(cfg.adsenseClient)) warn('adse
 const base = siteUrl || 'https://example.com';
 const email = cfg.contactEmail || 'contact@example.com';
 const today = new Date().toISOString().slice(0, 10);
-const LANGS = ['en', 'ko'].map(c => require('./content/' + c + '.js'));
+const LANGS = ['en', 'ko', 'th', 'vi', 'id'].map(c => require('./content/' + c + '.js'));
 const SLUGS = ['guides', 'guide-korean-names', 'guide-five-elements', 'guide-korean-zodiac', 'about', 'privacy', 'terms', 'contact'];
 const ADS_PAGES = new Set(['guide-korean-names', 'guide-five-elements', 'guide-korean-zodiac']);
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
@@ -23,7 +23,7 @@ const adsHead = cfg.adsenseClient
   : '';
 
 function page(L, slug) {
-  const p = L.pages[slug], O = LANGS.find(x => x.code === L.other);
+  const p = L.pages[slug];
   const u = L.ui;
   let html = p.html.replace(/\{\{EMAIL\}\}/g, email);
   if (ADS_PAGES.has(slug)) {
@@ -55,7 +55,7 @@ ${adsHead}
 <div class="wrap page">
   <header>
     <div><a class="brand" href="../index.html?lang=${L.code}">${esc(u.siteName)}</a><p class="sub">${esc(u.tagline)}</p></div>
-    <nav class="langs"><a class="pill" href="../${O.code}/${slug}.html" hreflang="${O.htmlLang}">${esc(L.otherLabel)}</a></nav>
+    <nav class="langs" aria-label="Language">${LANGS.map(x => `<a class="pill" href="../${x.code}/${slug}.html" hreflang="${x.htmlLang}"${x.code === L.code ? ' aria-current="page"' : ''}>${esc(x.otherLabel)}</a>`).join('')}</nav>
   </header>
   <nav class="links topnav">${nav}</nav>
   <article class="card prose">

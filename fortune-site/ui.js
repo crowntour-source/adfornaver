@@ -16,7 +16,8 @@
     return location.origin === 'null' ? location.href.split(/[?#]/)[0] : location.origin + location.pathname.replace(/index\.html$/, '');
   }
   const siteHost = () => { try { return new URL(baseUrl()).host || 'K-Name & K-Match'; } catch (e) { return 'K-Name & K-Match'; } };
-  const docDir = () => (lang === 'ko' ? 'ko/' : 'en/');
+  const DOC_LANGS = ['en', 'ko', 'th', 'vi', 'id']; // languages that have static content pages (see build.js)
+  const docDir = () => (DOC_LANGS.includes(lang) ? lang : 'en') + '/';
 
   function pickLang(q) {
     try {

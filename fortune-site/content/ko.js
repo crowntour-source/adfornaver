@@ -1,5 +1,5 @@
 module.exports = {
-  code: 'ko', htmlLang: 'ko', other: 'en', otherLabel: 'English',
+  code: 'ko', htmlLang: 'ko', other: 'en', otherLabel: '한국어',
   ui: {
     siteName: 'K-이름 · K-궁합', tagline: '한국을 좋아하는 팬을 위한 재미있는 한국 이름과 K-스타일 궁합',
     nav: { guides: '가이드', about: '소개', privacy: '개인정보처리방침', terms: '이용약관', contact: '문의' },

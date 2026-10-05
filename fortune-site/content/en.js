@@ -1,5 +1,5 @@
 module.exports = {
-  code: 'en', htmlLang: 'en', other: 'ko', otherLabel: '한국어',
+  code: 'en', htmlLang: 'en', other: 'ko', otherLabel: 'English',
   ui: {
     siteName: 'K-Name & K-Match', tagline: 'Fun Korean names and K-style compatibility for fans of Korea',
     nav: { guides: 'Guides', about: 'About', privacy: 'Privacy Policy', terms: 'Terms', contact: 'Contact' },
